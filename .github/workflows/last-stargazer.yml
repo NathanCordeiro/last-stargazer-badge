@@ -2,7 +2,7 @@ name: Update Last Stargazer Badge
 
 on:
   schedule:
-    - cron: "0 * * * *"  # Runs hourly
+    - cron: "0 * * * *" # Runs hourly
   workflow_dispatch:
   push:
     branches:
@@ -10,12 +10,7 @@ on:
 
 jobs:
   update-last-stargazer:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-    
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -24,26 +19,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Fetch the latest stargazer from the repository
-          STARGAZER=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-            https://api.github.com/repos/${{ github.repository }}/stargazers?per_page=1 \
-            | jq -r '.[0].login')
-          
-          echo $STARGAZER > last_stargazer.txt
+          curl -s -H "Authorization: token $GITHUB_TOKEN" \
+          https://api.github.com/repos/${{ github.repository }}/stargazers \
+          | jq -r '.[-1].login' > last_stargazer.txt
 
-      - name: Update README with Badge (Cross-Platform Sed Solution)
+      - name: Update README with Badge
         run: |
           LAST_STARGAZER=$(cat last_stargazer.txt)
-          BADGE_URL="https://img.shields.io/badge/%2ALAST%20STARGAZER%2A-${LAST_STARGAZER}-brightgreen?style=flat-square"
-          
-          # Cross-platform sed for Linux, macOS, and Windows
-          if [[ "$RUNNER_OS" == "Linux" ]]; then
-            sed -i.bak -E "s|!\[LAST STARGAZER\]\(.*\)|![LAST STARGAZER]($BADGE_URL)|" README.md
-          elif [[ "$RUNNER_OS" == "macOS" ]]; then
-            sed -i '' -E "s|!\[LAST STARGAZER\]\(.*\)|![LAST STARGAZER]($BADGE_URL)|" README.md
-          elif [[ "$RUNNER_OS" == "Windows" ]]; then
-            powershell -Command "(Get-Content README.md) -replace '!\\[LAST STARGAZER\\]\\(.*\\)', '!\\[LAST STARGAZER\\]($BADGE_URL)' | Set-Content README.md"
-          fi
+          BADGE_URL="https://img.shields.io/badge/Last%20Stargazer-${LAST_STARGAZER}-brightgreen?style=flat-square"
+          sed -i.bak -E "s|!\[Last Stargazer\]\(.*\)|![Last Stargazer]($BADGE_URL)|" README.md
 
       - name: Commit and Push Changes
         env:
