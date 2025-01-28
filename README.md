@@ -3,7 +3,7 @@
 Display the username of the **last person who starred your repository** with this dynamic GitHub Action!  
 Let visitors engage with your project while adding a fun interactive touch.
 
-![Last Stargazer](https://img.shields.io/badge/LAST%20STARGAZER-None-lightgrey?style=flat-square)
+![Last Stargazer](https://img.shields.io/badge/Last%20Stargazer-NathanCordeiro-brightgreen?style=flat-square)
 
 ## 🚀 How it Works
 
@@ -20,7 +20,7 @@ To add the **Last Stargazer Badge** to your repository:
    - Add the following markdown to your `README.md`:
 
      ```markdown
-     ![Last Stargazer](https://img.shields.io/badge/LAST%20STARGAZER-None-lightgrey?style=flat-square)
+     ![Last Stargazer](https://img.shields.io/badge/Last%20Stargazer-NathanCordeiro-brightgreen?style=flat-square)
      ```
 
 3. **Update repository permissions:**
@@ -41,7 +41,7 @@ To add the **Last Stargazer Badge** to your repository:
 This repository uses the badge—star this repo to test it for yourself!  
 Your name will appear here:
 
-![Last Stargazer](https://img.shields.io/badge/LAST%20STARGAZER-None-lightgrey?style=flat-square)
+![Last Stargazer](https://img.shields.io/badge/Last%20Stargazer-NathanCordeiro-brightgreen?style=flat-square)
 
 ---
 
