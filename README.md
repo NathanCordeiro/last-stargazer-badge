@@ -55,6 +55,7 @@ Your name will appear here:
 ## 📝 Notes
 - Ensure your repository has **write permissions** enabled for Actions.
 - Badges will not dynamically fetch for forks unless you also set up the workflow in the fork.
+- If you change the styling options for the badge (e.g., color, style, etc.) in the GitHub Action YAML file, you will also need to update the README.md
 
 ---
 
